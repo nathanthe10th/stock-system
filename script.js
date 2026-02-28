@@ -3,14 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hamburger menu functionality
     const hamburgerMenu = document.getElementById('hamburgerMenu');
     const sidebar = document.getElementById('sidebar');
-    const mainContent = document.querySelector('.main-content');
 
     hamburgerMenu.addEventListener('click', function() {
         sidebar.classList.toggle('active');
         
-        // Optional: Add overlay when sidebar is open
         if (sidebar.classList.contains('active')) {
-            // Create overlay if it doesn't exist
             if (!document.querySelector('.overlay')) {
                 const overlay = document.createElement('div');
                 overlay.className = 'overlay';
@@ -26,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
                 document.body.appendChild(overlay);
                 
-                // Close sidebar when clicking overlay
                 overlay.addEventListener('click', function() {
                     sidebar.classList.remove('active');
                     overlay.style.display = 'none';
@@ -35,9 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('.overlay').style.display = 'block';
         } else {
             const overlay = document.querySelector('.overlay');
-            if (overlay) {
-                overlay.style.display = 'none';
-            }
+            if (overlay) overlay.style.display = 'none';
         }
     });
 
@@ -45,32 +39,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const navItems = document.querySelectorAll('.nav-item');
     navItems.forEach(item => {
         item.addEventListener('click', function() {
-            // Remove active class from all items
             navItems.forEach(nav => nav.classList.remove('active'));
-            // Add active class to clicked item
             this.classList.add('active');
-            
-            // Close sidebar after selection (optional)
             sidebar.classList.remove('active');
             const overlay = document.querySelector('.overlay');
-            if (overlay) {
-                overlay.style.display = 'none';
-            }
+            if (overlay) overlay.style.display = 'none';
         });
-    });
-
-    // Add button functionality
-    const addBtn = document.querySelector('.add-btn');
-    addBtn.addEventListener('click', function() {
-        console.log('Add button clicked');
-        // Add functionality will be implemented later
-    });
-
-    // Remove button functionality
-    const removeBtn = document.querySelector('.remove-btn');
-    removeBtn.addEventListener('click', function() {
-        console.log('Remove button clicked');
-        // Remove functionality will be implemented later
     });
 
     // Search functionality
@@ -78,6 +52,15 @@ document.addEventListener('DOMContentLoaded', function() {
     searchBar.addEventListener('input', function(e) {
         const searchTerm = e.target.value.toLowerCase();
         console.log('Searching for:', searchTerm);
-        // Search functionality will be implemented later
+        
+        // Filter visible item rows by name
+        document.querySelectorAll('.item-row').forEach(row => {
+            const nameInput = row.querySelector('.item-name-input');
+            if (nameInput) {
+                const name = nameInput.value.toLowerCase();
+                // Only show items that start with the search term
+                row.style.display = name.startsWith(searchTerm) ? '' : 'none';
+            }
+        });
     });
 });
