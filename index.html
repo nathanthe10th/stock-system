@@ -8,12 +8,20 @@
 </head>
 <body>
     <div class="container">
-        <!-- Hamburger Menu Button -->
-        <button class="hamburger-menu" id="hamburgerMenu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+        <!-- Header -->
+        <header class="header">
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search">
+            </div>
+        </header>
 
         <!-- Left Navigation Bar -->
         <nav class="sidebar" id="sidebar">
@@ -27,23 +35,34 @@
 
         <!-- Main Content Area -->
         <main class="main-content">
-            <!-- Search Bar -->
-            <div class="search-container">
-                <input type="text" class="search-bar" placeholder="Search">
-            </div>
-
             <!-- Content Area -->
             <div class="content-area">
-                <div class="item-row">
-                    <span class="item-text">xxx dmy</span>
-                    <div class="button-group">
-                        <button class="btn add-btn">+</button>
-                        <button class="btn remove-btn">-</button>
+                <!-- Items will be loaded from Google Sheets here -->
+            </div>
+        </main>
+        
+        <!-- Floating Add Button -->
+        <button id="addNewItemBtn" class="floating-add-btn">+ Add New Item</button>
+        
+        <!-- Add Item Modal -->
+        <div id="addItemModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add New Item</h3>
+                    <span class="close-modal" id="closeModal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="newItemName" class="modal-input" placeholder="Type food name...">
+                    <div class="modal-buttons">
+                        <button id="confirmAddBtn" class="confirm-add-btn">Add</button>
+                        <button id="cancelAddBtn" class="cancel-add-btn">Cancel</button>
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
     </div>
     <script src="script.js"></script>
+    <script src="simple-google-sheets.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
 </body>
 </html>
